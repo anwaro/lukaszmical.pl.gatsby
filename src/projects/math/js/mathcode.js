@@ -1,6 +1,5 @@
-
-
 mathcode = function(inputElement, outputElement){
+
     var input = inputElement;
     var output = outputElement;
     prepareElements();

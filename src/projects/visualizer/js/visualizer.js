@@ -6,35 +6,34 @@
  * Project: lukaszmical.pl
  */
 canvasSetting = {
-    width : 900,
-    height : 500
+    width: 900,
+    height: 500
 };
 
 sceneConfig = {
-    viewer : new Point(0, 0, 300),
-    canvas : canvasSetting,
-    scale : 100,
+    viewer: new Point(0, 0, 300),
+    canvas: canvasSetting,
+    scale: 100,
     render: RENDER.PERSPECTIVE
     // render: RENDER.FLAT
 };
 
-pol1Congig ={
-    lineWidth : 4,
+pol1Congig = {
+    lineWidth: 4,
     strokeStyle: 'blue',
     lineJoin: 'round'
 };
-pol2Congig ={
-    lineWidth : 4,
+pol2Congig = {
+    lineWidth: 4,
     strokeStyle: 'red',
     lineJoin: 'round'
 };
 
 axisSetting = {
-    lineWidth : 1,
+    lineWidth: 1,
     strokeStyle: 'green',
     lineJoin: 'round'
 };
-
 
 
 var angle = 5;
@@ -62,7 +61,7 @@ var pol2 = new Polygon([
     new Vertex(1, -1, 1)
 ]);
 
-var mouse = new Point(0,0,0);
+var mouse = new Point(0, 0, 0);
 var mouseLazy = new Point(1, 2, 0);
 var scene = new Scene(sceneConfig);
 var canvas3d, canvas;
@@ -72,7 +71,7 @@ function mouseMove(event) {
     mouse.set(event.clientX - rect.left, event.clientY - rect.top);
 }
 
-function init(id){
+function init(id) {
     canvas = document.getElementById(id);
     canvas.addEventListener('mousemove', mouseMove);
     canvas.width = canvasSetting.width;
@@ -80,16 +79,18 @@ function init(id){
     var ctx = canvas.getContext("2d");
     canvas3d = new Canvas3d(ctx, scene);
     console.log(canvas3d);
-    setInterval(function(){rotate();}, 50);
+    setInterval(function () {
+        rotate();
+    }, 50);
 }
 
 
 function rotate() {
     canvas3d.cleanCanvas();
-    mouseLazy.x += (mouse.x - mouseLazy.x)*0.3;
-    mouseLazy.y += (mouse.y - mouseLazy.y)*0.3;
-    rotateAxis.set(mouseLazy.x - canvasSetting.width/2, canvasSetting.height/2 - mouseLazy.y);
-    canvas3d.strokeLine([rotateAxis.multiply(0), rotateAxis.multiply(1/sceneConfig.scale)], axisSetting);
+    mouseLazy.x += (mouse.x - mouseLazy.x) * 0.3;
+    mouseLazy.y += (mouse.y - mouseLazy.y) * 0.3;
+    rotateAxis.set(mouseLazy.x - canvasSetting.width / 2, canvasSetting.height / 2 - mouseLazy.y);
+    canvas3d.strokeLine([rotateAxis.multiply(0), rotateAxis.multiply(1 / sceneConfig.scale)], axisSetting);
 
     rotateAxis.normThis();
 
@@ -100,6 +101,5 @@ function rotate() {
     canvas3d.strokePolygon(pol2, pol2Congig);
 
 }
-$$.load(function () {
-    init('visualizer');
-});
+
+init('visualizer');

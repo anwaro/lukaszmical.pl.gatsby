@@ -1,59 +1,52 @@
 {
     "stayalive": {
-        "id": 1,
         "url": "stayalive",
         "name": "Stay Alive",
         "description": "Ruszaj piłką i unikaj min",
-        "photo": "stay.jpg",
         "css": [
             "stayalive.css"
         ],
         "js": [
-            "StayAlive.js",
-            "buzz.min.js"
+            "myQuery.js",
+            "buzz.min.js",
+            "CanvasCurve.js",
+            "StayAlive.js"
         ],
         "date": "2014-11-12",
-        "display": 1,
-        "template": "game"
+        "blank": true
     },
     "draw": {
-        "id": 2,
         "url": "draw",
         "name": "Paint",
         "description": "Internetowy paint",
-        "photo": "paint.jpg",
         "css": [
             "draw.css"
         ],
         "js": [
+            "myQuery.js",
             "draw.js"
         ],
         "date": "2015-05-28",
-        "display": 1,
-        "template": "game"
+        "blank": true
     },
     "flappy": {
-        "id": 3,
         "url": "flappy",
         "name": "Flappy Birds",
         "description": "Popularna gra flappy birds.",
-        "photo": "flappy.jpg",
         "css": [
             "flappy.css"
         ],
         "js": [
+            "myQuery.js",
             "flappy-bird.js"
         ],
         "date": "2015-05-20",
-        "display": 1,
-        "template": "game"
+        "blank": true
     },
     "plot": {
-        "id": 4,
         "url": "plot",
         "name": "Wykresy ",
         "description": "Aplikacja do rysowania wykresu funkcji.",
-        "photo": "plot.jpg",
         "css": [
             "plot.css"
         ],
@@ -61,83 +54,71 @@
             "math.js"
         ],
         "date": "2015-05-27",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "animate": {
-        "id": 5,
         "url": "animate",
         "name": "Animacja",
         "description": "Prosta animacja",
-        "photo": "div.jpg",
         "css": [
             "animate.css"
         ],
         "js": [
+            "myQuery.js",
             "animate.js"
         ],
         "date": "2015-05-22",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "photofilter": {
-        "id": 6,
         "url": "photofilter",
         "name": "Photo filter",
         "description": "Dodaje filtry do zdjęcia.",
-        "photo": "filter.jpg",
         "css": [
             "photofilter.css"
         ],
         "js": [
-            "photo.filter.js",
+            "myQuery.js",
+            "colorPicker.js",
             "photo.filter.mask.js",
-            "colorPicker.js"
+            "photo.filter.js"
         ],
         "date": "2015-05-04",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "puzzles": {
-        "id": 7,
         "url": "puzzles",
         "name": "Puzzle",
         "description": "Układaj puzzle z własnych zdjęć",
-        "photo": "puzzles.jpg",
         "css": [
             "puzzles.css"
         ],
         "js": [
+            "myQuery.js",
             "puzzles.js"
         ],
         "date": "2015-05-14",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "math": {
-        "id": 8,
         "url": "math",
         "name": "Wykresy ",
         "description": "Aplikacja do rysowania wykresu funkcji.",
-        "photo": "math.jpg",
         "css": [
             "math.css",
             "mathcode.css"
         ],
         "js": [
-            "math.new.js",
-            "mathcode.js"
+            "mathcode.js",
+            "math.new.js"
         ],
         "date": "2015-05-06",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "photo": {
-        "id": 9,
         "url": "photo",
         "name": "Pixel photo",
         "description": "Dodaje efekt łączenia kolorów w większe piksele.",
-        "photo": "photo.jpg",
         "css": [
             "photo.css"
         ],
@@ -145,15 +126,12 @@
             "photo.js"
         ],
         "date": "2015-05-06",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "temp": {
-        "id": 10,
         "url": "temp",
         "name": "Tenperatura",
         "description": "Temperaturę na ziemi w zależności od parametrów.",
-        "photo": "ir.jpg",
         "css": [
             "temp.css"
         ],
@@ -161,33 +139,27 @@
             "setting.js",
             "engine.js",
             "draw.js",
-            "main.js",
-            "event.js"
+            "event.js",
+            "main.js"
         ],
         "date": "2014-06-12",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "billiards": {
-        "id": 11,
         "url": "billiards",
         "name": "Bilard",
         "description": "Bilard",
-        "photo": "billiards.jpg",
         "css": [],
         "js": [
             "billiards.js"
         ],
         "date": "2015-05-22",
-        "display": 1,
-        "template": "game"
+        "blank": true
     },
     "squash": {
-        "id": 12,
         "url": "squash",
         "name": "Squash",
         "description": "Squash",
-        "photo": "squash.jpg",
         "css": [
             "squash.css"
         ],
@@ -195,64 +167,54 @@
             "squash.js"
         ],
         "date": "2015-05-21",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "test": {
-        "id": 100,
         "url": "test",
         "name": "Test",
         "description": "Test",
-        "photo": "test.jpg",
         "css": [
             "test.css"
         ],
         "js": [
+            "myQuery.js",
             "test.js"
         ],
         "date": "2015-05-20",
-        "display": 0,
-        "template": ""
+        "blank": true
     },
     "tetris": {
-        "id": 14,
         "url": "tetris",
         "name": "Tetris",
         "description": "Tetris",
-        "photo": "tetris.jpg",
         "css": [],
         "js": [
             "tetris.js"
         ],
         "date": "2015-05-21",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "graph": {
-        "id": 15,
         "url": "graph",
         "name": "Graph",
         "description": "Aplikacja rysująca wykresy",
-        "photo": "graph.jpg",
         "css": [
             "codemirror.css",
             "graph.css"
         ],
         "js": [
-            "graph.js",
+            "myQuery.js",
             "codemirror.js",
+            "graph.js",
             "demoGraph.js"
         ],
         "date": "2015-11-07",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "jigsaw": {
-        "id": 16,
         "url": "jigsaw",
         "name": "Układanka",
         "description": "Układanka z zdjęcia",
-        "photo": "jigsaw.jpg",
         "css": [
             "jigsaw.css"
         ],
@@ -260,32 +222,26 @@
             "jigsaw.js"
         ],
         "date": "2015-11-09",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "record": {
-        "id": 17,
         "url": "record",
         "name": "Record",
         "description": "Nagrywanie filmu z elementu canvas",
-        "photo": "record.jpg",
         "css": [
             "record.css"
         ],
         "js": [
-            "demoRecord.js",
-            "record.js"
+            "record.js",
+            "demoRecord.js"
         ],
         "date": "2015-11-12",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "clock": {
-        "id": 13,
         "url": "clock",
         "name": "Clock",
         "description": "Zegarek analogowy",
-        "photo": "clock.jpg",
         "css": [
             "clock.css"
         ],
@@ -293,31 +249,26 @@
             "clock.js"
         ],
         "date": "2015-11-13",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "hangman": {
-        "id": 18,
         "url": "hangman",
         "name": "Wisielec",
         "description": "Gra wisielec",
-        "photo": "hangman.jpg",
         "css": [
             "hangman.css"
         ],
         "js": [
+            "myQuery.js",
             "hangman.js"
         ],
         "date": "2015-11-18",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "mp3player": {
-        "id": 19,
         "url": "mp3player",
         "name": "Mp3 Player",
         "description": "Odtwarzacz muzyki",
-        "photo": "mp3player.jpg",
         "css": [
             "mp3player.css"
         ],
@@ -325,33 +276,27 @@
             "mp3player.js"
         ],
         "date": "2015-11-19",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "car3d": {
-        "id": 102,
         "url": "car3d",
         "name": "Car 3D model",
         "description": "Model samochodu ",
-        "photo": "car3D.jpg",
         "css": [
             "car3D.css"
         ],
         "js": [
-            "car3D.js",
             "three.min.js",
-            "OBJLoader.js"
+            "OBJLoader.js",
+            "car3D.js"
         ],
         "date": "2016-02-12",
-        "display": 0,
-        "template": ""
+        "blank": true
     },
     "jump": {
-        "id": 103,
         "url": "jump",
         "name": "Jump",
         "description": "-",
-        "photo": "default.jpg",
         "css": [
             "jump.css"
         ],
@@ -359,15 +304,12 @@
             "jump.js"
         ],
         "date": "2016-02-20",
-        "display": 0,
-        "template": ""
+        "blank": true
     },
     "gauss": {
-        "id": 104,
         "url": "gauss",
         "name": "Gauss",
         "description": "Rozkład liczb pseudolosowych",
-        "photo": "gauss.jpg",
         "css": [
             "gauss.css"
         ],
@@ -375,63 +317,53 @@
             "gauss.js"
         ],
         "date": "2016-02-23",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "mathcode": {
-        "id": 105,
         "url": "mathcode",
         "name": "Math Code",
         "description": "Kod funckcji",
-        "photo": "default.jpg",
         "css": [
             "mathcode.css"
         ],
         "js": [
-            "mathcode.js"
+            "mathcode.js",
+            "demo.js"
         ],
         "date": "2016-03-10",
-        "display": 0,
-        "template": ""
+        "blank": true
     },
     "photoeditor": {
-        "id": 106,
         "url": "photoeditor",
         "name": "Edytor zdjęć",
         "description": "Dodaje filtry do zdjęcia.",
-        "photo": "photoeditor.jpg",
         "css": [
             "photoeditor.css"
         ],
         "js": [
+            "colorpicker.js",
             "photo.filter.mask.js",
-            "photoeditor.js",
-            "colorpicker.js"
+            "photoeditor.js"
         ],
         "date": "2016-03-10",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "colorpicker": {
-        "id": 107,
         "url": "colorpicker",
         "name": "Kolor picker",
-        "description": "Widget wyboru koloru",
-        "photo": "default.jpg",
+        "description": "",
         "css": [],
         "js": [
-            "colorpicker.js"
+            "colorpicker.js",
+            "demo.js"
         ],
         "date": "2016-03-14",
-        "display": 0,
-        "template": ""
+        "blank": true
     },
     "rubikscube": {
-        "id": 108,
         "url": "rubikscube",
         "name": "Kostka rubika",
         "description": "",
-        "photo": "rubikcube.jpg",
         "css": [
             "rubikscube.css"
         ],
@@ -439,15 +371,12 @@
             "rubikscube.js"
         ],
         "date": "2016-03-16",
-        "display": 1,
-        "template": "game"
+        "blank": true
     },
     "graf": {
-        "id": 121,
         "url": "graf",
         "name": "Graf",
         "description": "Grafik",
-        "photo": "default.jpg",
         "css": [
             "graf.css"
         ],
@@ -455,15 +384,12 @@
             "graf.js"
         ],
         "date": "2016-06-02",
-        "display": 0,
-        "template": "game"
+        "blank": true
     },
     "sync": {
-        "id": 122,
         "url": "sync",
         "name": "Sync",
         "description": "-",
-        "photo": "default.jpg",
         "css": [
             "sync.css"
         ],
@@ -471,15 +397,12 @@
             "sync.js"
         ],
         "date": "2016-06-29",
-        "display": 0,
-        "template": "game"
+        "blank": true
     },
     "canvas3d": {
-        "id": 128,
         "url": "canvas3d",
         "name": "Canvas 3D",
         "description": "Biblioteka 3d",
-        "photo": "default.jpg",
         "css": [
             "canvas3d.css"
         ],
@@ -489,80 +412,68 @@
             "demo3d.js"
         ],
         "date": "2016-09-27",
-        "display": 0,
-        "template": ""
+        "blank": true
     },
     "my-query": {
-        "id": 125,
         "url": "my-query",
         "name": "myQuery",
         "description": "Mała biblioteka js",
-        "photo": "myQuery.jpg",
         "css": [
             "myQuery.css"
         ],
         "js": [],
         "date": "2016-09-19",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "visualizer": {
-        "id": 126,
         "url": "visualizer",
         "name": "Visualiser 3D",
         "description": "Audio visualizer 3D",
-        "photo": "default.jpg",
         "css": [
             "visualizer.css"
         ],
         "js": [
+            "myQuery.js",
             "object3d.js",
             "canvas3d.js",
             "visualizer.js"
         ],
         "date": "2016-09-20",
-        "display": 0,
-        "template": ""
+        "blank": true
     },
     "audio": {
-        "id": 127,
         "url": "audio",
         "name": "Audio Visualizer 3D",
         "description": "",
-        "photo": "default.jpg",
         "css": [
             "audio.css"
         ],
         "js": [
+            "myQuery.js",
             "glMatrix-0.9.5.min.js",
             "audio.js"
         ],
         "date": "2016-09-23",
-        "display": 0,
-        "template": "game"
+        "blank": true
     },
     "life": {
-        "id": 129,
         "url": "life",
         "name": "Gra w życie",
         "description": "",
-        "photo": "life.jpg",
         "css": [
             "life.css"
         ],
         "js": [
+            "myQuery.js",
             "life.js"
         ],
         "date": "2016-10-02",
-        "display": 1,
-        "template": ""
+        "blank": true
     },
     "run": {
-        "id": 130,
         "url": "run",
         "name": "Run calculator",
         "description": "Calculate speed, pace, distance and time",
-        "photo": "run.jpg",
         "css": [
             "bootstrap.min.css",
             "run.css"
@@ -571,15 +482,12 @@
             "run.js"
         ],
         "date": "2017-06-07",
-        "display": 1,
-        "template": "game"
+        "blank": true
     },
     "text": {
-        "id": 131,
         "url": "text",
         "name": "Text Statistics",
         "description": "Text Statistics",
-        "photo": "default.jpg",
         "css": [
             "text.css"
         ],
@@ -587,15 +495,12 @@
             "text.js"
         ],
         "date": "2017-06-16",
-        "display": 0,
-        "template": "game"
+        "blank": true
     },
     "grid": {
-        "id": 132,
         "url": "grid",
         "name": "Particle",
         "description": "Cząstki oddziałujące z kursorem",
-        "photo": "grid.jpg",
         "css": [
             "grid.css"
         ],
@@ -603,15 +508,12 @@
             "grid.js"
         ],
         "date": "2017-06-28",
-        "display": 1,
-        "template": "game"
+        "blank": true
     },
     "drop": {
-        "id": 133,
         "url": "drop",
         "name": "Drops",
         "description": "Ruch bąbelków",
-        "photo": "default.jpg",
         "css": [
             "drop.css"
         ],
@@ -619,15 +521,12 @@
             "drop.js"
         ],
         "date": "2017-07-11",
-        "display": 0,
-        "template": "game"
+        "blank": true
     },
     "rock-paper-scissors": {
-        "id": 134,
         "url": "rock-paper-scissors",
         "name": "Kamień papier nożyce",
         "description": "Kamień papier nożyce",
-        "photo": "default.jpg",
         "css": [
             "rock-paper-scissors.css"
         ],
@@ -635,49 +534,42 @@
             "rock-paper-scissors.js"
         ],
         "date": "2017-07-20",
-        "display": 0,
-        "template": "game"
+        "blank": true
     },
     "md5": {
-        "id": 135,
         "url": "md5",
         "name": "Md5 Generator",
         "description": "This online tool allows you to generate the MD5 hash of any string.",
-        "photo": "md5.jpg",
         "css": [
             "md5.css"
         ],
-        "js": [],
+        "js": [
+            "md5.js",
+            "index.js"
+        ],
         "date": "2018-07-01",
-        "display": 1,
-        "template": "game"
+        "blank": true
     },
     "animal": {
-        "id": 136,
         "url": "animal",
         "name": "Animal",
         "description": "Animal animation",
-        "photo": "animal.jpg",
         "css": [],
         "js": [
             "animal.js"
         ],
         "date": "2018-12-27",
-        "display": 1,
-        "template": "game"
+        "blank": true
     },
     "runner": {
-        "id": 137,
         "url": "runner",
         "name": "Runner",
         "description": "Runner animation",
-        "photo": "runner.jpg",
         "css": [
             "runner.css"
         ],
         "js": [],
         "date": "2018-12-27",
-        "display": 1,
-        "template": "game"
+        "blank": true
     }
 }

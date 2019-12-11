@@ -1,5 +1,3 @@
-/* global $$, canvas, ctx, table, user, billsInHole, bills, stick */
-
 billiards = new function () {
     var canvas, ctx,
         width = 800,
@@ -32,10 +30,12 @@ billiards = new function () {
                 this.img.src = this.src;
             }
         },
-        colors = ["#DBDE0A", "#522906", "#D69012", "#A4A707", "#1B1918", "#CE0C0C", "#DE3B3B", "#82420C", "#0F8FCC", "#0C8204", "#7E0CE6", "#44077B",
-            "#44077B", "#001FFF", "#0A5005"];
+        colors = [
+            "#DBDE0A", "#522906", "#D69012", "#A4A707", "#1B1918", "#CE0C0C", "#DE3B3B", "#82420C", "#0F8FCC",
+            "#0C8204", "#7E0CE6", "#44077B", "#44077B", "#001FFF", "#0A5005"
+        ];
     this.init = function () {
-        canvas = $$("#billCanvas");
+        canvas = document.querySelector("#billCanvas");
 
         setCanvas();
         user = new UserBill(new Bill(30 + marginX, 200 + marginY, 10, "white"));
@@ -44,8 +44,9 @@ billiards = new function () {
         stick.load();
         table.load();
 
-        canvas.addEvent("mousemove", mousePoss).addEvent("mousedown", setForce);
-        $$("html").addEvent("mouseup", initShoot);
+        canvas.addEventListener("mousemove", mousePoss);
+        canvas.addEventListener("mousedown", setForce);
+        document.querySelector("html").addEventListener("mouseup", initShoot);
         if (canvas.getContext) {
             ctx = canvas.getContext("2d");
             setInterval(draw, 1000 / 60);
@@ -54,7 +55,7 @@ billiards = new function () {
 
     function setCanvas() {
         canvas.height = height + 2 * marginY;
-        var widthBody = $$("body").width();
+        const widthBody = document.querySelector("body").offsetWidth;
         marginX = (widthBody - width) / 2;
         canvas.width = widthBody;
     }
@@ -147,10 +148,10 @@ billiards = new function () {
             diss1 = sumV ? v1 / sumV * diss + 0.01 : 0,
             diss2 = sumV ? v2 / sumV * diss + 0.01 : 0;
 
-        if (v1)bill1.x -= bill1.vx * diss1 / v1;
-        if (v2)bill2.x -= bill2.vx * diss2 / v2;
-        if (v1)bill1.y -= bill1.vy * diss1 / v1;
-        if (v2)bill2.y -= bill2.vy * diss2 / v2;
+        if (v1) bill1.x -= bill1.vx * diss1 / v1;
+        if (v2) bill2.x -= bill2.vx * diss2 / v2;
+        if (v1) bill1.y -= bill1.vy * diss1 / v1;
+        if (v2) bill2.y -= bill2.vy * diss2 / v2;
     }
 
     function bilIsInHolle(bill, i) {
@@ -198,8 +199,7 @@ billiards = new function () {
         if (force > 5) {
             force -= hitSpeed;
             setTimeout(hitBill, 1000 / 60);
-        }
-        else {
+        } else {
             force = 10;
             isMove = true;
             var max = Math.max(Math.abs(mouseX - user.bill.x), Math.abs(mouseY - user.bill.y));
@@ -276,8 +276,7 @@ function Bill(x, y, r, color) {
         if (Math.abs(this.vx * this.vx + this.vy * this.vy) > 0.1) {
             this.vx *= 0.99;
             this.vy *= 0.99;
-        }
-        else {
+        } else {
             this.vx = 0;
             this.vy = 0;
         }
@@ -289,4 +288,4 @@ function UserBill(bill, s) {
     this.bill = bill;
 }
 
-$$.load(billiards.init);
+billiards.init();

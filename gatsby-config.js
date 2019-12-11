@@ -10,7 +10,7 @@ module.exports = {
             resolve: 'gatsby-source-filesystem',
             options: {
                 name: 'images',
-                path: `${__dirname}/src/images`,
+                path: `${__dirname}/src/projects`,
             },
         },
         {
@@ -25,7 +25,7 @@ module.exports = {
                 fileName: 'types/graphql-types.ts',
                 codegen: true,
                 codegenDelay: 250,
-                alwaysCheck: false,
+                typeCheck: false,
             }
         },
         'gatsby-transformer-sharp',

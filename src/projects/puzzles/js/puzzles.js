@@ -25,7 +25,7 @@ $puzzles = new function () {
         //area.height(y);
         area.width(x);
 
-        if (img == "KOM") {
+        if (img === "KOM") {
             $$('#select').fadeOut(300, function () {
                 $$("#puzzleArea").fadeIn(300);
             });
@@ -36,17 +36,15 @@ $puzzles = new function () {
             reader.onload = function (e) {
                 src = e.target.result;
                 imageInfo();
-            }
+            };
             reader.readAsDataURL(file.files[0]);
-        }
-        else if (img == "URL") {
+        } else if (img === "URL") {
             $$('#select').fadeOut(300, function () {
                 $$("#puzzleArea").fadeIn(300);
             });
             src = $$("#photoURL").value;
             imageInfo();
-        }
-        else {
+        } else {
             $$('#sample').fadeOut(300, function () {
                 $$("#puzzleArea").fadeIn(300);
             });
@@ -55,7 +53,7 @@ $puzzles = new function () {
             //src = "img/img"+(nr||1)+".jpg";
             imageInfo();
         }
-    }
+    };
 
     function prepareDivs() {
         for (var i = 0; i < 25; i++) {
@@ -85,7 +83,7 @@ $puzzles = new function () {
                 height: divHeight + "px",
                 width: divWidth + "px"
             });
-            puzzles.push(new Element(div, l * divWidth, t * divHeight, ranX, ranY, a));
+            puzzles.push(new PuzzlesElement(div, l * divWidth, t * divHeight, ranX, ranY, a));
         }
     }
 
@@ -95,7 +93,7 @@ $puzzles = new function () {
             isMove = true;
             dragElement = id;
             puzzles[dragElement - 1].el.css({cursor: "move", zIndex: 9, opacity: 1});
-            rotateDiv(puzzles[dragElement - 1].el, 0)
+            rotateDiv(puzzles[dragElement - 1].el, 0);
             moveDiv();
         }
     }
@@ -126,15 +124,14 @@ $puzzles = new function () {
                     opacity: 1
                 });
                 $$("#puzzleAreaLay").appendChild(area.removeChild(div.el));
-                if (++leyPuzzles == size * size) {
+                if (++leyPuzzles === size * size) {
                     showMSG("Brawo! Udało Ci się ułożyć wszystkie puzzle", 1);
                     leyPuzzles = 0;
                     puzzles = [];
                 }
-            }
-            else {
+            } else {
                 returnElement = dragElement;
-                rotateDiv(puzzles[dragElement - 1].el, puzzles[dragElement - 1].angle)
+                rotateDiv(puzzles[dragElement - 1].el, puzzles[dragElement - 1].angle);
                 returnDiv(div);
             }
         }
@@ -159,16 +156,14 @@ $puzzles = new function () {
         if (Math.abs(div.ran.x - div.curr.x) > 2 * Math.abs(div.step.x)) {
             moveStop = false;
             div.curr.x += div.step.x;
-        }
-        else {
+        } else {
             div.curr.x = div.ran.x;
         }
 
         if (Math.abs(div.ran.y - div.curr.y) > 2 * Math.abs(div.step.y)) {
             moveStop = false;
             div.curr.y += div.step.y;
-        }
-        else {
+        } else {
             div.curr.y = div.ran.y;
         }
         div.el.css({left: div.curr.x + "px", top: div.curr.y + "px"});
@@ -201,8 +196,7 @@ $puzzles = new function () {
                     $$('#puzzleArea').hide();
                     showMSG("Zbyt wielki rozmiar obrazka!", 0);
                 }, 1000);
-            }
-            else {
+            } else {
                 $$("#puzzleAreaLay").width(imgWidth + 0.01).height(imgHeight + 0.01).css("backgroundImage", "url(" + frame + ") ").show();
                 $$("#imageView").src = src;
                 $$("#imageView").height = imgWidth / imgHeight * 200;
@@ -210,7 +204,7 @@ $puzzles = new function () {
                 divWidth = imgWidth / 5;
                 prepareDivs();
             }
-        }
+        };
         img.src = src;
     }
 
@@ -253,7 +247,7 @@ function reset() {
 
 }
 
-function Element(el, x, y, ranX, ranY, a) {
+function PuzzlesElement(el, x, y, ranX, ranY, a) {
     this.el = el;
     this.pass = new Point(x, y);
     this.curr = new Point();

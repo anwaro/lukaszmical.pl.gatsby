@@ -1,7 +1,7 @@
 /**
  * Created by lukasz on 21.09.16.
  */
-RENDER = {
+window.RENDER = {
     FLAT : 0,
     PERSPECTIVE : 1
 
@@ -124,7 +124,7 @@ function Canvas3d(ctx, scene) {
 
 
     this.project = function(vertex){
-        if(this.scene.config.render == RENDER.PERSPECTIVE){
+        if(this.scene.config.render === window.RENDER.PERSPECTIVE){
             return this.scene.transform(this.scene.project(vertex));
         }else{
             return this.scene.transform(vertex);

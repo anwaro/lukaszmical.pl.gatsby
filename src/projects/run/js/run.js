@@ -1,45 +1,45 @@
-var activeBox = [];
-var inputBox = [];
+let activeBox = [];
+let inputBox = [];
 
-var period = {
-    h : null,
-    min : null,
+const period = {
+    h: null,
+    min: null,
     sec: null
 };
 
-var distance = {
-    km : null,
-    m : null
+const distance = {
+    km: null,
+    m: null
 };
 
-var speed = {
+const speed = {
     km_h: null,
     m_s: null
 };
 
-var pace = {
-    min : null,
-    sec : null
+const pace = {
+    min: null,
+    sec: null
 };
 
-var table = {
-    renderPeriod : 0,
-    timeout : 500,
-    body : null,
-    header :{
-        top : null,
-        side : null
+const table = {
+    renderPeriod: 0,
+    timeout: 500,
+    body: null,
+    header: {
+        top: null,
+        side: null
     },
-    style : null,
-    activeRow : -1,
-    activeCol : -1
+    style: null,
+    activeRow: -1,
+    activeCol: -1
 };
 
 label = {
-    'period' : 'Czas',
-    'speed' : 'Prędkość',
-    'pace' : 'Tempo',
-    'distance' : 'Dystans'
+    'period': 'Czas',
+    'speed': 'Prędkość',
+    'pace': 'Tempo',
+    'distance': 'Dystans'
 };
 
 /**
@@ -80,8 +80,8 @@ function initTable() {
     table.body = document.getElementById('run-table-body');
     table.header.top = document.getElementById('run-table-header-top');
     table.header.side = document.getElementById('run-table-header-side');
-    var td = document.querySelectorAll('td');
-    for (var i = 0; i < td.length; i++) {
+    const td = document.querySelectorAll('td');
+    for (let i = 0; i < td.length; i++) {
         td[i].addEventListener('mouseover', activeCell);
     }
     table.body.addEventListener('mouseleave', loseActive);
@@ -111,13 +111,12 @@ function addTableStyle() {
 }
 
 
-
 function activeCell(e) {
-    var el = e.target;
-    if(el.tagName.toLowerCase() === 'td'){
-        var col = el.cellIndex + 1;
-        var row = el.parentNode.rowIndex + 1;
-        if((col !== table.activeCol || row !== table.activeRow) && row > 1 && col > 1){
+    const el = e.target;
+    if (el.tagName.toLowerCase() === 'td') {
+        const col = el.cellIndex + 1;
+        const row = el.parentNode.rowIndex + 1;
+        if ((col !== table.activeCol || row !== table.activeRow) && row > 1 && col > 1) {
             table.style.innerHTML =
                 ".table-body .table-main table tr:nth-child(" + row + ") {" +
                 "background-color: rgba(255, 255, 255, 0.7);" +
@@ -141,7 +140,7 @@ function activeCell(e) {
 function loseActive() {
     table.activeRow = -1;
     table.activeCol = -1;
-    table.style.innerHTML ='';
+    table.style.innerHTML = '';
 }
 
 /**
@@ -149,16 +148,14 @@ function loseActive() {
  * @param {String} base
  */
 function recalculateSpeed(base) {
-    var val;
-    if(base === 's_km'){
+    let val;
+    if (base === 's_km') {
         setSpeed(skm_to_ms(getPace()))
-    }
-    else if(base === 'km_h'){
+    } else if (base === 'km_h') {
         val = kmh_to_ms(getSpeed('km_h'));
         setSpeed(val, 'm_s');
         setPace(ms_to_skm(val))
-    }
-    else if(base === 'm_s'){
+    } else if (base === 'm_s') {
         val = getSpeed('m_s');
         setSpeed(ms_to_kmh(val), 'km_h');
         setPace(ms_to_skm(val))
@@ -169,44 +166,62 @@ function recalculateSpeed(base) {
  * Calculate period, distance or speed(pace)
  */
 function recalculate() {
-    if(activeBox.length === 2){
+    if (activeBox.length === 2) {
         table.renderPeriod = timestamp(table.timeout);
-        var _top, _side, _calc, active = [activeBox[0].dataset.type, activeBox[1].dataset.type];
-        var _speed = getSpeed();
-        var _pace = getPace();
-        var _period = getPeriod();
-        var _distance = getDistance();
+        let _top, _side, _calc;
+        const active = [activeBox[0].dataset.type, activeBox[1].dataset.type];
+        const _speed = getSpeed();
+        const _pace = getPace();
+        const _period = getPeriod();
+        const _distance = getDistance();
 
-        if(inArrayValues('period', 'distance', active)){
-            if(!validValue(_period, _distance)){return false;}
-            _calc = 'pace'; _top = 'distance'; _side = 'period';
-            setPace(calculateVal(_calc,  _distance, _top, _period, _side));
-            setSpeed(_distance /_period);
-        }
-        else if(inArrayValues('period', 'pace', active)){
-            if(!validValue(_period, _pace)){return false;}
-            _calc = 'distance'; _top = 'period'; _side = 'pace';
-            setDistance(calculateVal(_calc,  _period, _top, _pace, _side));
-        }
-        else if(inArrayValues('period', 'speed', active)){
-            if(!validValue(_period, _speed)){return false;}
-            _calc = 'distance'; _top = 'period'; _side = 'speed';
-            setDistance(calculateVal(_calc,  _period, _top, _speed, _side));
-        }
-        else if(inArrayValues('distance', 'pace', active)){
-            if(!validValue(_distance, _pace)){return false;}
-            _calc = 'period'; _top = 'distance'; _side = 'pace';
-            setPeriod(calculateVal(_calc,  _distance, _top, _pace, _side));
-        }
-        else if(inArrayValues('distance', 'speed', active)){
-            if(!validValue(_distance, _speed)){return false;}
-            _calc = 'period'; _top = 'distance'; _side = 'speed';
-            setPeriod(calculateVal(_calc,  _distance, _top, _speed, _side));
-        }
-        else{
+        if (inArrayValues('period', 'distance', active)) {
+            if (!validValue(_period, _distance)) {
+                return false;
+            }
+            _calc = 'pace';
+            _top = 'distance';
+            _side = 'period';
+            setPace(calculateVal(_calc, _distance, _top, _period, _side));
+            setSpeed(_distance / _period);
+        } else if (inArrayValues('period', 'pace', active)) {
+            if (!validValue(_period, _pace)) {
+                return false;
+            }
+            _calc = 'distance';
+            _top = 'period';
+            _side = 'pace';
+            setDistance(calculateVal(_calc, _period, _top, _pace, _side));
+        } else if (inArrayValues('period', 'speed', active)) {
+            if (!validValue(_period, _speed)) {
+                return false;
+            }
+            _calc = 'distance';
+            _top = 'period';
+            _side = 'speed';
+            setDistance(calculateVal(_calc, _period, _top, _speed, _side));
+        } else if (inArrayValues('distance', 'pace', active)) {
+            if (!validValue(_distance, _pace)) {
+                return false;
+            }
+            _calc = 'period';
+            _top = 'distance';
+            _side = 'pace';
+            setPeriod(calculateVal(_calc, _distance, _top, _pace, _side));
+        } else if (inArrayValues('distance', 'speed', active)) {
+            if (!validValue(_distance, _speed)) {
+                return false;
+            }
+            _calc = 'period';
+            _top = 'distance';
+            _side = 'speed';
+            setPeriod(calculateVal(_calc, _distance, _top, _speed, _side));
+        } else {
             return false;
         }
-        setTimeout(function(){renderTable(_top, _side, _calc)}, table.timeout + 200);
+        setTimeout(function () {
+            renderTable(_top, _side, _calc)
+        }, table.timeout + 200);
     }
 }
 
@@ -230,26 +245,26 @@ function validValue(val1, val2) {
  * @returns {Number}
  */
 function calculateVal(type, val1, type1, val2, type2) {
-    if(val1 === 0 || val2 === 0){
+    if (val1 === 0 || val2 === 0) {
         return 0;
     }
-    if(type === 'pace' && type1 === 'distance' && type2 === 'period'){
+    if (type === 'pace' && type1 === 'distance' && type2 === 'period') {
         // val1 [m] val2 [s]  ---> [s/km]
         return ms_to_skm(val1 / val2);
     }
-    if(type === 'distance' && type1 === 'period' && type2 === 'pace'){
+    if (type === 'distance' && type1 === 'period' && type2 === 'pace') {
         // val1 [s] val2 [s/km] ---> [m]
         return val1 / val2 * 1000;
     }
-    if(type === 'distance' && type1 === 'period' && type2 === 'speed'){
+    if (type === 'distance' && type1 === 'period' && type2 === 'speed') {
         // val1 [s] val2 [m/s] ---> [m]
         return val1 * val2;
     }
-    if(type === 'period' && type1 === 'distance' && type2 === 'pace'){
+    if (type === 'period' && type1 === 'distance' && type2 === 'pace') {
         // val1 [m] val2 [s/km] ---> [s]
         return val1 * val2 / 1000;
     }
-    if(type === 'period' && type1 === 'distance' && type2 === 'speed'){
+    if (type === 'period' && type1 === 'distance' && type2 === 'speed') {
         // val1 [m] val2 [m/s] ---> [s]
         return val1 / val2;
     }
@@ -262,29 +277,30 @@ function calculateVal(type, val1, type1, val2, type2) {
  * @returns {String}
  */
 function formatVal(type, val) {
-    if(type === 'period'){
-        var _period= parsePeriod(val);
+    if (type === 'period') {
+        const _period = parsePeriod(val);
         return (_period.h !== 0 ? _period.h + ":" : "") + twoChar(_period.min) + ":" + twoChar(_period.sec)
     }
-    if(type === 'distance'){
-        var _distance = parseDistance(val);
+    if (type === 'distance') {
+        const _distance = parseDistance(val);
         return _distance.km + "km " + (_distance.m !== 0 ? _distance.m + "m" : "");
     }
-    if(type === 'speed'){
+    if (type === 'speed') {
         return fixNumber(ms_to_kmh(val), 3) + "km/h";
     }
-    if(type === 'pace'){
-        var _pace = parsePace(val);
+    if (type === 'pace') {
+        const _pace = parsePace(val);
         return twoChar(_pace.min) + "':" + twoChar(_pace.sec) + '"'
     }
 }
+
 /**
  *
  * @param {String|Number} val
  * @returns {String|Number}
  */
 function twoChar(val) {
-    if(val < 10) val = "0" + val;
+    if (val < 10) val = "0" + val;
     return val;
 }
 
@@ -293,7 +309,7 @@ function twoChar(val) {
  * @param {Number} sec
  */
 function setPeriod(sec) {
-    var _period = parsePeriod(sec);
+    const _period = parsePeriod(sec);
     period.h.value = _period.h;
     period.min.value = _period.min;
     period.sec.value = _period.sec;
@@ -304,16 +320,14 @@ function setPeriod(sec) {
  * @param {Number} _speed
  * @param {String} [type=false]
  */
-function setSpeed(_speed, type){
+function setSpeed(_speed, type) {
     type = type || false;
-    if(!type){
+    if (!type) {
         speed.m_s.value = speedFormat(_speed);
         speed.km_h.value = speedFormat(ms_to_kmh(_speed));
-    }
-    else if(type === 'm_s'){
+    } else if (type === 'm_s') {
         speed.m_s.value = speedFormat(_speed);
-    }
-    else if(type === 'km_h'){
+    } else if (type === 'km_h') {
         speed.km_h.value = speedFormat(_speed);
     }
 }
@@ -323,7 +337,7 @@ function setSpeed(_speed, type){
  * @param {Number} s_km - pace [s/km]
  */
 function setPace(s_km) {
-    var _pace = parsePace(s_km);
+    const _pace = parsePace(s_km);
     pace.min.value = _pace.min;
     pace.sec.value = _pace.sec;
 }
@@ -333,7 +347,7 @@ function setPace(s_km) {
  * @param {Number} m - distance [m]
  */
 function setDistance(m) {
-    var _distance = parseDistance(m);
+    const _distance = parseDistance(m);
     distance.km.value = _distance.km;
     distance.m.value = _distance.m;
 }
@@ -344,14 +358,14 @@ function setDistance(m) {
  * @returns {{km: Number, m: Number}}
  */
 function parseDistance(m) {
-    var km = floor(m / 1000);
+    let km = floor(m / 1000);
     m -= km * 1000;
     m = round(m);
-    if(m === 1000){
+    if (m === 1000) {
         m = 0;
-        km ++;
+        km++;
     }
-    return {km : km, m : m};
+    return {km: km, m: m};
 }
 
 /**
@@ -360,11 +374,11 @@ function parseDistance(m) {
  * @returns {{h : Number, min : Number, sec : Number}}
  */
 function parsePeriod(sec) {
-    var h = floor(sec / 3600);
+    const h = floor(sec / 3600);
     sec -= h * 3600;
-    var min = floor(sec / 60);
+    const min = floor(sec / 60);
     sec -= min * 60;
-    return fixPeriod({h : h, min : min, sec : sec});
+    return fixPeriod({h: h, min: min, sec: sec});
 }
 
 
@@ -374,9 +388,9 @@ function parsePeriod(sec) {
  * @returns {{min : Number, sec : Number}}
  */
 function parsePace(sec) {
-    var min = floor(sec / 60);
+    const min = floor(sec / 60);
     sec -= min * 60;
-    return fixPeriod({h: 0, min : min, sec : sec});
+    return fixPeriod({h: 0, min: min, sec: sec});
 }
 
 /**
@@ -384,13 +398,13 @@ function parsePace(sec) {
  * @param {Object} period
  * @returns {Object}
  */
-function fixPeriod(period){
+function fixPeriod(period) {
     period.sec = round(period.sec);
-    if(period.sec === 60){
-        period.sec =0;
+    if (period.sec === 60) {
+        period.sec = 0;
         period.min++
     }
-    if(period.min === 60){
+    if (period.min === 60) {
         period.min = 0;
         period.h++
     }
@@ -437,7 +451,7 @@ function getPace() {
  * @returns {Number}
  */
 function value(el) {
-    var val = float(el.value);
+    const val = float(el.value);
     return isNaN(val) ? 0 : val;
 }
 
@@ -445,13 +459,12 @@ function value(el) {
  * Set events on all inputs
  */
 function inputEvent() {
-    var inputs = document.getElementsByTagName('input');
-    for(var i =0; i < inputs.length; i++){
-        if(inputs[i].type === 'text') {
+    const inputs = document.getElementsByTagName('input');
+    for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].type === 'text') {
             inputs[i].addEventListener('keydown', validNumber);
             inputs[i].addEventListener('focus', active);
-        }
-        else if(inputs[i].type === 'button') {
+        } else if (inputs[i].type === 'button') {
             inputs[i].addEventListener('click', selectDistance);
         }
     }
@@ -464,7 +477,7 @@ function inputEvent() {
  * @param {String} val
  * @returns {Boolean}
  */
-function isEqual(array, index, val){
+function isEqual(array, index, val) {
     return array[index] && array[index].dataset.type === val;
 }
 
@@ -472,25 +485,22 @@ function isEqual(array, index, val){
  *
  */
 function selectDistance() {
-    var type = this.dataset.type;
-    var el;
-    if(type === "distance"){
+    const type = this.dataset.type;
+    let el;
+    if (type === "distance") {
         distance.km.value = this.dataset.km;
         distance.m.value = this.dataset.m;
         el = distance.km;
-    }
-    else if(type === "pace"){
+    } else if (type === "pace") {
         pace.min.value = this.dataset.min;
         pace.sec.value = this.dataset.sec;
         el = pace.min;
-    }
-    else if(type === "period"){
+    } else if (type === "period") {
         period.h.value = this.dataset.h;
         period.min.value = this.dataset.min;
         period.sec.value = this.dataset.sec;
         el = period.h;
-    }
-    else if(type === "speed"){
+    } else if (type === "speed") {
         speed.km_h.value = this.dataset.km_h;
         speed.m_s.value = this.dataset.m_s;
         el = speed.km_h;
@@ -504,30 +514,30 @@ function selectDistance() {
  */
 function active(el) {
     el = el.target ? el.target : el;
-    var parent = getParent(el, 'input-area');
-    var type = parent.dataset.type;
+    const parent = getParent(el, 'input-area');
+    const type = parent.dataset.type;
     //Remove speed from active before adding pace and conversely
-    var double = type === 'pace' ? 'speed' : type === 'speed' ? 'pace' : false;
-    if(double){
-        if(isEqual(activeBox, 1, double)){
+    const double = type === 'pace' ? 'speed' : type === 'speed' ? 'pace' : false;
+    if (double) {
+        if (isEqual(activeBox, 1, double)) {
             activeBox.splice(1, 1);
         }
-        if(isEqual(activeBox, 0, double)){
+        if (isEqual(activeBox, 0, double)) {
             activeBox.splice(0, 1);
         }
     }
 
-    if(!parent.classList.contains('active')){
+    if (!parent.classList.contains('active')) {
         parent.classList.add('active');
         activeBox.push(parent);
     }
 
-    var toRemove = activeBox.length - 2;
-    if(toRemove > 0){
+    const toRemove = activeBox.length - 2;
+    if (toRemove > 0) {
         activeBox.splice(0, toRemove);
     }
 
-    if(parent.dataset.type === activeBox[0].dataset.type){
+    if (parent.dataset.type === activeBox[0].dataset.type) {
         activeBox = activeBox.reverse();
     }
     setActiveBoxes();
@@ -537,10 +547,10 @@ function active(el) {
  * Remove active class from all boxes and add only to current active
  */
 function setActiveBoxes() {
-    for(var i = 0; i < inputBox.length; i++){
+    for (let i = 0; i < inputBox.length; i++) {
         inputBox[i].classList.remove('active');
     }
-    for(var j = 0; j < activeBox.length; j++){
+    for (let j = 0; j < activeBox.length; j++) {
         activeBox[j].classList.add('active');
     }
 }
@@ -552,16 +562,19 @@ function setActiveBoxes() {
  * @returns {Boolean}
  */
 function validNumber(e) {
-    var key = e.keyCode || e.charCode;
-    var el = this;
-    if(key === 38) valid(el, 1);
-    else if(key === 40) valid(el, -1);
-    else if(inArray(key, [46, 8, 9, 27, 13, 110, 188, 190])){
-        setTimeout(function(){valid(el, 0)}, 100);
+    const key = e.keyCode || e.charCode;
+    const el = this;
+    if (key === 38) valid(el, 1);
+    else if (key === 40) valid(el, -1);
+    else if (inArray(key, [46, 8, 9, 27, 13, 110, 188, 190])) {
+        setTimeout(function () {
+            valid(el, 0)
+        }, 100);
         return true;
-    }
-    else{
-        setTimeout(function(){valid(el, 0)}, 100);
+    } else {
+        setTimeout(function () {
+            valid(el, 0)
+        }, 100);
         return (key >= 48 && key <= 57) || (key >= 96 && key <= 105);
     }
 }
@@ -571,16 +584,20 @@ function validNumber(e) {
  * @param {Object} el
  * @param {Number} add
  */
-function valid(el, add){
-    var val = el.value.replace(',', '.');
-    if(val.slice(-1) !== ".") {
+function valid(el, add) {
+    let val = el.value.replace(',', '.');
+    if (val.slice(-1) !== ".") {
         val = float(val) + add;
-        var max = int(el.dataset.max);
-        if (val <= 0) {val = 0}
-        if (val >= max){val = max}
+        const max = int(el.dataset.max);
+        if (val <= 0) {
+            val = 0
+        }
+        if (val >= max) {
+            val = max
+        }
     }
     el.value = val;
-    if(el.dataset && el.dataset.hasOwnProperty('type')) {
+    if (el.dataset && el.dataset.hasOwnProperty('type')) {
         recalculateSpeed(el.dataset.type);
     }
     recalculate();
@@ -610,7 +627,7 @@ function fixNan(val) {
  * @returns {number|string}
  */
 function speedFormat(num) {
-    if(abs(int(num) - float(num).toFixed(1)) < 0.1){
+    if (abs(int(num) - float(num).toFixed(1)) < 0.1) {
         return int(num);
     }
     return float(num).toFixed(1);
@@ -695,7 +712,9 @@ function minArray(array) {
  * @returns {Array}
  */
 function sortArray(array) {
-    return array.sort(function (a,b){return a - b});
+    return array.sort(function (a, b) {
+        return a - b
+    });
 }
 
 /**
@@ -751,9 +770,9 @@ function timestamp(add) {
  * @returns {Object|null}
  */
 function getParent(el, parentClass) {
-    var parent = el.parentNode;
-    if(parent){
-        if(parent.classList.contains(parentClass)){
+    const parent = el.parentNode;
+    if (parent) {
+        if (parent.classList.contains(parentClass)) {
             return parent;
         }
         return getParent(parent, parentClass);
@@ -767,10 +786,10 @@ function getParent(el, parentClass) {
  * @param {String} side
  * @param {String} calc
  */
-function renderTable(top, side, calc){
-    if(timestamp() > table.renderPeriod){
-        var rangeTop =  getRangeByName(top, getColumnCount());
-        var rangeSide = getRangeByName(side, 20);
+function renderTable(top, side, calc) {
+    if (timestamp() > table.renderPeriod) {
+        const rangeTop = getRangeByName(top, getColumnCount());
+        const rangeSide = getRangeByName(side, 20);
         renderTableBody(calc, rangeTop, top, rangeSide, side);
         setTableTitle(top, side);
     }
@@ -783,10 +802,18 @@ function renderTable(top, side, calc){
  * @returns {Array.<Number>}
  */
 function getRangeByName(name, count) {
-    if(name === 'period'){return getPeriodRange(getPeriod(), count)}
-    if(name === 'pace'){return getPaceRange(getPace(), count)}
-    if(name === 'speed'){return getSpeedRange(getSpeed('km_h'), count)}
-    if(name === 'distance'){return getDistanceRange(getDistance(), count)}
+    if (name === 'period') {
+        return getPeriodRange(getPeriod(), count)
+    }
+    if (name === 'pace') {
+        return getPaceRange(getPace(), count)
+    }
+    if (name === 'speed') {
+        return getSpeedRange(getSpeed('km_h'), count)
+    }
+    if (name === 'distance') {
+        return getDistanceRange(getDistance(), count)
+    }
 }
 
 /**
@@ -796,7 +823,7 @@ function getRangeByName(name, count) {
  * @returns {Array.<Number>}
  */
 function getPaceRange(val, count) {
-    return getRange(val, count/2, count, 120, 600);
+    return getRange(val, count / 2, count, 120, 600);
 }
 
 /**
@@ -806,12 +833,18 @@ function getPaceRange(val, count) {
  * @returns {Array.<Number>}
  */
 function getDistanceRange(val, count) {
-    var dist = [21097, 42195];
-    var parsedVal = round(val / 1000) * 1000;
-    var range = getRange(parsedVal, 500 * count, count, 1e3, 2e5);
-    if(minArray(range) < dist[0] && dist[0] < maxArray(range)){range.push(dist[0])}
-    if(minArray(range) < dist[1] && dist[1] < maxArray(range)){range.push(dist[1])}
-    if(!inArray(val, range)){range.push(val)}
+    const dist = [21097, 42195];
+    const parsedVal = round(val / 1000) * 1000;
+    const range = getRange(parsedVal, 500 * count, count, 1e3, 2e5);
+    if (minArray(range) < dist[0] && dist[0] < maxArray(range)) {
+        range.push(dist[0])
+    }
+    if (minArray(range) < dist[1] && dist[1] < maxArray(range)) {
+        range.push(dist[1])
+    }
+    if (!inArray(val, range)) {
+        range.push(val)
+    }
     return sortArray(range);
 }
 
@@ -822,11 +855,13 @@ function getDistanceRange(val, count) {
  * @returns {Array.<Number>}
  */
 function getSpeedRange(val, count) {
-    var range =  getRange(val, count/4, count, 1, 30);
-    range = range.map(function(km_h) {
+    let range = getRange(val, count / 4, count, 1, 30);
+    range = range.map(function (km_h) {
         return kmh_to_ms(km_h);
     });
-    if(!inArray(kmh_to_ms(val), range)){range.push(kmh_to_ms(val))}
+    if (!inArray(kmh_to_ms(val), range)) {
+        range.push(kmh_to_ms(val))
+    }
     return sortArray(range);
 }
 
@@ -837,9 +872,11 @@ function getSpeedRange(val, count) {
  * @returns {Array.<Number>}
  */
 function getPeriodRange(val, count) {
-    var parsedVal = round(val / 60) * 60;
-    var range = getRange(parsedVal, 30 * count, count, 10, 2e6);
-    if(!inArray(val, range)){range.push(val)}
+    const parsedVal = round(val / 60) * 60;
+    const range = getRange(parsedVal, 30 * count, count, 10, 2e6);
+    if (!inArray(val, range)) {
+        range.push(val)
+    }
     return sortArray(range);
 }
 
@@ -852,10 +889,10 @@ function getPeriodRange(val, count) {
  * @param {String} side
  */
 function renderTableBody(type, rangeTop, top, rangeSide, side) {
-    var _tr, val, html = renderTopHeader(rangeTop, top);
-    for(var sid = 0; sid < rangeSide.length; sid++){
+    let _tr, val, html = renderTopHeader(rangeTop, top);
+    for (let sid = 0; sid < rangeSide.length; sid++) {
         _tr = td(formatVal(side, rangeSide[sid]));
-        for(var to = 0; to < rangeTop.length; to++){
+        for (let to = 0; to < rangeTop.length; to++) {
             val = calculateVal(type, rangeTop[to], top, rangeSide[sid], side);
             _tr += td(formatVal(type, val));
         }
@@ -871,8 +908,8 @@ function renderTableBody(type, rangeTop, top, rangeSide, side) {
  * @returns {String}
  */
 function renderTopHeader(data, type) {
-    var html = td('');
-    for(var i = 0; i < data.length; i++){
+    let html = td('');
+    for (let i = 0; i < data.length; i++) {
         html += td(formatVal(type, data[i]));
     }
     return tr(html);
@@ -911,8 +948,8 @@ function setTableTitle(top, side) {
  * @returns {Number}
  */
 function getColumnCount() {
-    var x =  round(table.body.offsetWidth / 60 - 11/6) - 1;
-    return Math.min(10, Math.max(3,x));
+    const x = round(table.body.offsetWidth / 60 - 11 / 6) - 1;
+    return Math.min(10, Math.max(3, x));
 }
 
 /**
@@ -924,18 +961,18 @@ function getColumnCount() {
  * @param {Number} max
  * @returns {Array<Number>}
  */
-function getRange(val, epsilon, count, min, max){
-    if(val < min) val = min;
-    if(val > max) val = max;
+function getRange(val, epsilon, count, min, max) {
+    if (val < min) val = min;
+    if (val > max) val = max;
     val = fixNumber(val);
-    var start = Math.max(val - epsilon, min);
-    var end = Math.min(val + epsilon, max);
-    var range = end - start;
-    var dX = fixNumber(range / count);
+    let start = Math.max(val - epsilon, min);
+    let end = Math.min(val + epsilon, max);
+    const range = end - start;
+    const dX = fixNumber(range / count);
     start = val - int((val - start) / dX) * dX;
     end = val + int((end - val) / dX) * dX;
-    var point = [];
-    for(var i = start; i <= end; i+=dX){
+    const point = [];
+    for (let i = start; i <= end; i += dX) {
         point.push(fixNumber(i, 5));
     }
     return point;
@@ -950,8 +987,8 @@ function getRange(val, epsilon, count, min, max){
 function fixNumber(val, dec) {
     dec = dec - 1 || 1;
     val = float(val);
-    var count = 0;
-    while(val < Math.pow(10, dec)){
+    let count = 0;
+    while (val < Math.pow(10, dec)) {
         val *= 10;
         count++;
     }
@@ -959,4 +996,4 @@ function fixNumber(val, dec) {
 }
 
 
-window.addEventListener('DOMContentLoaded', init);
+init();

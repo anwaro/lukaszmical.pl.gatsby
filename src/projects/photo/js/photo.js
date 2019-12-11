@@ -2,26 +2,26 @@
 
 $photo = new function () {
     var canvas, canvas2,
-            ctx, ctx2,
-            input,
-            Im,
-            photoData,
-            newPhoto = [],
-            step = 25;
+        ctx, ctx2,
+        input,
+        Im,
+        photoData,
+        newPhoto = [],
+        step = 25;
 
 
     this.init = function () {
         canvas = document.getElementById("photoCanvas");
         canvas2 = document.getElementById("photoHide");
-        input = $$("#photo");
+        input = document.querySelector("#photo");
         if (canvas && canvas.getContext) {
             ctx = canvas.getContext("2d");
             ctx2 = canvas2.getContext("2d");
-            input.addEvent('change', loadPhoto);
-            $$("#range").addEvent('change', transform);
-            $$("#pixel").addEvent('change', transform);
-            $$("#circle").addEvent('change', transform);
-            $$("#dots").addEvent('change', transform);
+            input.addEventListener('change', loadPhoto);
+            document.querySelector("#range").addEventListener('change', transform);
+            document.querySelector("#pixel").addEventListener('change', transform);
+            document.querySelector("#circle").addEventListener('change', transform);
+            document.querySelector("#dots").addEventListener('change', transform);
         }
     };
 
@@ -48,8 +48,8 @@ $photo = new function () {
     function transform() {
         photoData = ctx2.getImageData(0, 0, canvas2.width, canvas2.height);
         var d = photoData.data,
-                w = photoData.width,
-                line = [];
+            w = photoData.width,
+            line = [];
         newPhoto = [];
         for (var i = 0, l = 0, j = 0; i < d.length; i += 4) {
             l = (++j) % w;
@@ -61,7 +61,7 @@ $photo = new function () {
         }
         step = parseInt(document.getElementById("range").value);
 
-        if ($$("#pixel").checked) {
+        if (document.querySelector("#pixel").checked) {
 
             for (var i = 0; i < photoData.width; i += step) {
                 for (var j = 0; j < photoData.height; j += step) {
@@ -78,8 +78,7 @@ $photo = new function () {
                 }
             }
             ctx.putImageData(photoData, 0, 0);
-        }
-        else if ($$("#circle").checked) {
+        } else if (document.querySelector("#circle").checked) {
             step = Math.max(step, 5);
             ctx.clearRect(0, 0, photoData.width, photoData.height);
             for (var i = 0; i < photoData.width; i += step) {
@@ -91,8 +90,7 @@ $photo = new function () {
                     ctx.fill();
                 }
             }
-        }
-        else if ($$("#dots").checked) {
+        } else if (document.querySelector("#dots").checked) {
             step = 5;//Math.max(step , 5);
             var c;
             ctx.clearRect(0, 0, photoData.width, photoData.height);
@@ -116,9 +114,9 @@ $photo = new function () {
     function setAverage(x, y, avg) {
         avg = avg || 0;
         var r = 0, g = 0, b = 0, a = 0,
-                maxX = Math.min(x + step, photoData.width),
-                maxY = Math.min(y + step, photoData.height),
-                s = 0;
+            maxX = Math.min(x + step, photoData.width),
+            maxY = Math.min(y + step, photoData.height),
+            s = 0;
 
         for (var i = y; i < maxY; i++) {
             for (var j = x; j < maxX; j++) {
@@ -147,6 +145,4 @@ $photo = new function () {
 
 };
 
-document.addEventListener('DOMContentLoaded', function () {
-    $photo.init();
-});
+$photo.init();

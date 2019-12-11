@@ -1,7 +1,7 @@
 /* global $$ */
 
 var imgWidth, imgHeight, divHeight, divWidth, area, areaLey, lx = 3, ly = 3,
-        x, y, divs = [], empty, lock=false;
+    x, y, divs = [], empty, lock = false;
 
 function newGame(type, nr) {
     $$.addEvent(window, 'keyup', keypress);
@@ -25,15 +25,13 @@ function newGame(type, nr) {
             imageInfo();
         };
         reader.readAsDataURL(file.files[0]);
-    }
-    else if (type === "URL") {
+    } else if (type === "URL") {
         $$('#select').fadeOut(300, function () {
             $$("#puzzleArea").fadeIn(300);
         });
         src = $$("#photoURL").value;
         imageInfo();
-    }
-    else {
+    } else {
         $$('#sample').fadeOut(300, function () {
             $$("#puzzleArea").fadeIn(300);
         });
@@ -52,11 +50,11 @@ function prepareDivs() {
             var div = $$("<div>");
             //div.id = "block"+i+"-"+j;
             div.addClass("block")
-                    .height(divHeight)
-                    .width(divWidth)
-                    .css("background", "url(" + src + ") -" + (i * divWidth) + "px -" + (j * divHeight) + "px");
+                .height(divHeight)
+                .width(divWidth)
+                .css("background", "url(" + src + ") -" + (i * divWidth) + "px -" + (j * divHeight) + "px");
 
-            divs.push(new Element(div, k));
+            divs.push(new JigsawElement(div, k));
 
         }
     }
@@ -88,8 +86,7 @@ function imageInfo() {
                 $$('#puzzleArea').hide();
                 showMSG("Zbyt wielki rozmiar obrazka!", 0);
             }, 1000);
-        }
-        else {
+        } else {
             $$("#puzzleAreaLay").width(imgWidth + 0.01 + lx * 2).height(imgHeight + 0.01 + ly * 2).show();
             $$("#imageView").src = src;
             $$("#imageView").height = imgWidth / imgHeight * 200;
@@ -129,7 +126,7 @@ function keypress(evt) {
 }
 
 function move(elNum, dx, dy) {
-    if(!lock){
+    if (!lock) {
         var ele = getElement(elNum);
         var currNum = ele.currNum;
         ele.currNum = empty;
@@ -137,21 +134,22 @@ function move(elNum, dx, dy) {
         var top = parseFloat(ele.el.css("top"));
         var left = parseFloat(ele.el.css("left"));
         ele.el.css({left: left + dx * divWidth + "px", top: top + dy * divHeight + "px"});
-        lock = true;        
-        if(checkWin()){
-            showMSG("Brawo! Udało Ci się ułożyć wszystkie elementy",1);            
-        }
-        else{
-            setTimeout(function(){lock=false;}, 110);
+        lock = true;
+        if (checkWin()) {
+            showMSG("Brawo! Udało Ci się ułożyć wszystkie elementy", 1);
+        } else {
+            setTimeout(function () {
+                lock = false;
+            }, 110);
         }
     }
 
 }
 
-function checkWin(){
+function checkWin() {
     var win = true;
-    for(var i =0; i<divs.length;i++){
-        if(divs[i].currNum !== divs[i].passNum){
+    for (var i = 0; i < divs.length; i++) {
+        if (divs[i].currNum !== divs[i].passNum) {
             win = false;
         }
     }
@@ -186,10 +184,10 @@ function imageExists() {
 
 function showMSG(mesage, ok) {
     $$(".MSG").fadeIn()
-            .setText(mesage)
-            .removeClass("ok")
-            .removeClass("error")
-            .addClass(ok ? "ok" : "error");
+        .setText(mesage)
+        .removeClass("ok")
+        .removeClass("error")
+        .addClass(ok ? "ok" : "error");
 }
 
 function reset() {
@@ -201,14 +199,14 @@ function reset() {
     $$(".MSG").hide();
     $$("#imageView").src = '';
     $$("#imageView").hide();
-    
-    
+
+
     divs = [];
-    lock=false;
+    lock = false;
 
 }
 
-function Element(el, num) {
+function JigsawElement(el, num) {
     this.el = el;
     this.passNum = num;
     this.currNum = 0;

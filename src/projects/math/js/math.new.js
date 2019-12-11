@@ -69,20 +69,20 @@ $math = new function () {
             fun1 = document.querySelector(".d-fun1"),
             fun2 = document.querySelector(".d-fun2"),
             fun3 = document.querySelector(".d-fun3");
-        if (file1.hasClass("off")) {
-            fun1.addClass("off");
-            fun2.addClass("off");
-            fun3.addClass("off");
-            file1.removeClass("off");
-            file2.removeClass("off");
+        if (file1.classList.contains("off")) {
+            fun1.classList.add("off");
+            fun2.classList.add("off");
+            fun3.classList.add("off");
+            file1.classList.remove("off");
+            file2.classList.remove("off");
             dataType = "file";
             proces = true;
         } else {
-            file1.addClass("off");
-            file2.addClass("off");
-            fun1.removeClass("off");
-            fun2.removeClass("off");
-            fun3.removeClass("off");
+            file1.classList.add("off");
+            file2.classList.add("off");
+            fun1.classList.remove("off");
+            fun2.classList.remove("off");
+            fun3.classList.remove("off");
             dataType = "fun";
             proces = false;
         }
@@ -114,8 +114,8 @@ $math = new function () {
             labX = isNaN(labX) ? 0 : labX;
             labY = isNaN(labY) ? 0 : labY;
 
-            labPosX = labX + 10 + size < x ? labX + 10 : x - size - 5;
-            labPosY = labY - 65 < 5 ? 5 : labY - 65;
+            let labPosX = labX + 10 + size < x ? labX + 10 : x - size - 5;
+            let labPosY = labY - 65 < 5 ? 5 : labY - 65;
 
             ctx.beginPath();
             ctx.fillStyle = "rgba(0, 122, 126, 0.6)";
@@ -256,7 +256,7 @@ $math = new function () {
             maxX += 5;
             minX -= 5;
         }
-        line = [];
+        let line = [];
         data = [];
         for (var i = 0; i < dF.length; i++) {
             line.push(new Point(dF[i][0], dF[i][1]));
@@ -513,8 +513,9 @@ $math = new function () {
             var re = new RegExp(key, 'g');
             fun = fun.replace(re, fun_nam[key]);
         }
-        document.querySelector("#out-fun").setText(fun)
-            .css("background", '#C7FFC7');
+        document.querySelector("#out-fun")
+        document.querySelector("#out-fun").innerHTML = fun;
+        document.querySelector("#out-fun").style.background = '#C7FFC7';
         return fun;
     }
 
@@ -571,7 +572,7 @@ $math = new function () {
     }
 
     function functionSyntaxError() {
-        document.querySelector("#out-fun").css("background", "#FFC7C7");
+        document.querySelector("#out-fun").style.background = "#FFC7C7";
     }
 };
 
@@ -586,8 +587,5 @@ function Point(x, y) {
     this.y = y || 0;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    $math.init();
-});
-
+$math.init();
 

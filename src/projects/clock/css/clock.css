@@ -1,30 +1,28 @@
-.clockCanv{
+.clockCanv {
     margin-top: 14px;
 }
 
-.clock-all{
+.clock-all {
     overflow: hidden;
     width: 320px;
-    margin: auto;
-    margin-top: 50px;
+    margin: 50px auto auto;
     padding: 10px;
-    background-color: #FFFFFF;
 }
 
 /*
 * Apple smart watch
 */
 
-.clockApple{
+.clockApple {
     border: 14px solid #D7D6D6;
     border-radius: 49px;
     width: 268px;
     height: 308px;
     position: absolute;
-    top:0px;
+    top: 0;
 }
 
-.clockApple:before{
+.clockApple:before {
     width: 26px;
     height: 66px;
     content: " ";
@@ -33,13 +31,13 @@
     z-index: 999;
     left: 243px;
     top: 40px;
-    border: 3px solid #FFFFFF;    
+    border: 3px solid #FFFFFF;
     border-left-width: 4px;
     border-radius: 100% 44% 44% 100% / 90% 44% 44% 90%;
-    
+
 }
 
-.clockApple:after{
+.clockApple:after {
     width: 15px;
     height: 91px;
     content: " ";
@@ -48,12 +46,12 @@
     z-index: 999;
     left: 247px;
     top: 136px;
-    border: 3px solid #FFFFFF;   
+    border: 3px solid #FFFFFF;
     border-radius: 70% 50% 50% 70% / 100% 100% 100% 100%;
-    
+
 }
 
-.clockDivApple{
+.clockDivApple {
     width: 268px;
     height: 308px;
     position: relative;
@@ -65,19 +63,19 @@
 */
 
 
-.clockKors{
+.clockKors {
     width: 268px;
     height: 268px;
     border-radius: 50%;
     background-image: radial-gradient(transparent 115px, #131313 115px, #1B1A1A 117px, #252525 119px, #383838 134px, transparent 100%);
-    box-shadow: inset 0 1px 1px rgba(255,255,255,0.0), 2px -1px 1px -2px rgba(0,0,0,0.3), 
-        0 -1px 1px 1px #363636, 0 2px 1px 2px #232323, 0 1px 1px 1px rgba(255,255,255,0.6);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.0), 2px -1px 1px -2px rgba(0, 0, 0, 0.3),
+    0 -1px 1px 1px #363636, 0 2px 1px 2px #232323, 0 1px 1px 1px rgba(255, 255, 255, 0.6);
     position: absolute;
-    top:0px;
+    top: 0;
     z-index: 99
 }
 
-.clockKors:before{
+.clockKors:before {
     width: 15px;
     height: 10px;
     content: " ";
@@ -85,25 +83,24 @@
     position: absolute;
     z-index: 9;
     left: 269px;
-    top: 129px;    
-    
+    top: 129px;
+
 }
 
-.clockKors:after{
+.clockKors:after {
     width: 15px;
     height: 25px;
     content: " ";
-    background: #D7D6D6;
     position: absolute;
     z-index: 99;
     left: 272px;
     top: 121px;
     border-radius: 2px;
-    background-image:  linear-gradient(to bottom, transparent 0%, #232323 20%, #9C9B9B 40%, #232323 60%, #9C9B9B 80%, #232323 100%, transparent 100%);
-    
+    background: #D7D6D6 linear-gradient(to bottom, transparent 0%, #232323 20%, #9C9B9B 40%, #232323 60%, #9C9B9B 80%, #232323 100%, transparent 100%);
+
 }
 
-.clockDivKors{
+.clockDivKors {
     width: 268px;
     height: 308px;
     position: relative;
